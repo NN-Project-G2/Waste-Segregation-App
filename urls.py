@@ -1,14 +1,18 @@
 import json
 import traceback
 
-from views import *
+from typing import List
 
 from fastapi import APIRouter, Request
+from sqlalchemy.orm import Session
+
+from . import schemas
+from .views import *
 
 
 router = APIRouter(
     prefix="/api",
-    tags=["wasteTypeIdentifier"],
+    tags=["wasteClassifier"],
     responses={404: {"description": "Not found"}},
 )
 
@@ -18,17 +22,17 @@ def test_route():
     return test_view()
 
 
-@router.get("/register")
-def register_user():
-    return test_view()
+@router.post("/register", response_model=schemas.User)
+def register_user(user: schemas.UserCreate):
+    return register(user)
 
 
-@router.get("/login")
-def login_user():
-    return test_view()
+@router.post("/login")
+def login_user(email: str, password: str):
+    return login(email, password)
 
 
-@router.get("/reset")
+@router.post("/reset")
 def reset_user_password():
     return test_view()
 

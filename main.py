@@ -4,6 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from urls import router
 
+from . import models
+
+models.Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
 
 app.include_router(router)

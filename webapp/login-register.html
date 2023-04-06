@@ -4,6 +4,7 @@
         <title>Waste Segregation</title>
         <link rel="stylesheet" href="./static/site.css">
         <link rel="stylesheet" href="./static/login-register.css">
+        <script src="./static/js/login-register.js"></script>
     </head>
 
     <body>
@@ -13,9 +14,54 @@
                 SORTING WASTE WITH<br> POWER OF AI VISION
             </div>
             <div class="topB">
-                <button>Log In</button>
-                <button>Register</button>
+                <button onclick="viewLoginForm()">Log In</button>
+                <button onclick="viewRegistrationForm()">Register</button>
             </div>
+        </div>
+
+        <div class="formBody">
+            <div id="login-form" style="display: block;">
+                <div class="formHeading">Log In</div>
+                <div>Email:</div>
+                <div>
+                    <input type="email" placeholder="e.g. john@mail.com"/>
+                </div>
+                <div>Password:</div>
+                <div>
+                    <input type="password" placeholder="***********"/>
+                </div>
+                <div style="text-align: center;">
+                    <button>Submit</button>
+                </div>
+                <span style="color: #3d5aff; cursor: pointer;">Reset Password</span>
+            </div>
+
+            <div id="registration-form" style="display: none;">
+                <div class="formHeading">Register</div>
+                <div>Email:</div>
+                <div>
+                    <input type="email" placeholder="e.g. john@mail.com"/>
+                </div>
+                <div>Password:</div>
+                <div>
+                    <input type="password" placeholder="***********"/>
+                </div>
+                <div>Confirm Password:</div>
+                <div>
+                    <input type="password" placeholder="***********"/>
+                </div>
+                <div>Secret Question-Answer (for password reset):</div>
+                <div>
+                    <input type="text" placeholder="Secret Question"/>
+                </div>
+                <div>
+                    <input type="text" placeholder="Secret Answer"/>
+                </div>
+                <div style="text-align: center;">
+                    <button>Submit</button>
+                </div>
+            </div>
+
         </div>
 
     </body>

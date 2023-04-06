@@ -1,0 +1,63 @@
+body {
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    font-size: large;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+
+/* custom classes */
+.topBar {
+    width: 100%;
+    color: white;
+    height: 20%;
+    display: flex;
+    padding: 15px;
+}
+
+.mainContent {
+    width: 100%;
+    background-color: white;
+    height: 60%;
+    padding: 15px;
+}
+
+.bottomBar {
+    width: 100%;
+    color: white;
+    padding: 15px;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.topA {
+    width: 50%;
+    font-size: xx-large;
+    font-weight: bold;
+    padding: 25px;
+}
+
+.topB {
+    width: 50%;
+    text-align: end;
+    margin-right: 50px;
+    padding-top: 25px;
+}
+
+.contentBody {
+    width: 437px; 
+    font-family: Saira Condensed;
+    padding: 15px;
+    padding-top: 0px;
+}

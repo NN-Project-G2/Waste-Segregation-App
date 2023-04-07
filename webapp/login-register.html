@@ -34,7 +34,7 @@
                 <div style="text-align: center;">
                     <button>Submit</button>
                 </div>
-                <span style="color: #3d5aff; cursor: pointer;">Reset Password</span>
+                <span style="color: #3d5aff; cursor: pointer;" onclick="viewResetPasswordForm()">Reset Password</span>
             </div>
 
             <div id="registration-form" style="display: none;">
@@ -57,6 +57,21 @@
                 </div>
                 <div>
                     <input type="text" placeholder="Secret Answer"/>
+                </div>
+                <div style="text-align: center;">
+                    <button>Submit</button>
+                </div>
+            </div>
+
+            <div id="reset-password-form" style="display: none;">
+                <div class="formHeading">Reset Password</div>
+                <div>Secret Question:</div>
+                <div>
+                    <input type="text" placeholder="Question"/>
+                </div>
+                <div>Secret Answer:</div>
+                <div>
+                    <input type="text" placeholder="Answer"/>
                 </div>
                 <div style="text-align: center;">
                     <button>Submit</button>

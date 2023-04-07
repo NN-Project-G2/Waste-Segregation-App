@@ -3,7 +3,6 @@
     <head>
         <title>Waste Segregation</title>
         <link rel="stylesheet" href="./static/site.css">
-        <link rel="stylesheet" href="./static/login-register.css">
     </head>
 
     <body>
@@ -15,6 +14,36 @@
             <div class="topB">
                 <button>Log Out</button>
             </div>
+        </div>
+
+        <div style="display: flex;">
+
+            <div style="margin-left: calc(50% - 456px); width: 360px; color: white;">
+                <div class="formHeading">Predict Waste Type</div>
+                <div>Select Image:</div>
+                <div>
+                    <input type="file"/>
+                </div>
+                <div>Predicted Waste Type:</div>
+                <div>
+                    <span id="predictionOutput">N.A.</span>
+                </div>
+                <div style="text-align: center;">
+                    <button>Submit</button>
+                </div>
+            </div>
+
+            <div>
+                <div style="display: flex;">
+                    <div><img width="276px" height="252px" src="static/images/app-img1.jpg"></div>
+                    <div><img width="276px" height="252px" src="static/images/app-img2.jpg"></div>
+                </div>
+                <div style="display: flex;">
+                    <div><img width="276px" height="252px" src="static/images/app-img3.jpg"></div>
+                    <div><img width="276px" height="252px" src="static/images/app-img4.jpg"></div>
+                </div>
+            </div>
+
         </div>
 
     </body>

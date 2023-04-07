@@ -67,9 +67,10 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 .formBody {
     width: fit-content;
-    background-color: white;
+    background-color: #333333;
     padding: 15px;
     margin-left: calc(50% - 200px);
+    color: white;
 }
 
 .formHeading {

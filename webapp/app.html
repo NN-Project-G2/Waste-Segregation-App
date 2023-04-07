@@ -1,0 +1,55 @@
+<html>
+
+    <head>
+        <title>Waste Segregation</title>
+        <link rel="stylesheet" href="./static/site.css">
+        <link rel="stylesheet" href="./static/app.css">
+    </head>
+
+    <body>
+        
+        <div class="topBar">
+            <div class="topA">
+                SORTING WASTE WITH<br> POWER OF AI VISION
+            </div>
+            <div class="topB">
+                <button>Log Out</button>
+            </div>
+        </div>
+
+        <div style="display: flex;">
+
+            <div class="predictionForm">
+                <div class="formHeading">Predict Waste Type</div>
+                <div style="margin-top: calc(30% - 50px);">
+                    <div class="formLabel">Select Image:</div>
+                    <div>
+                        <input type="file"/>
+                    </div>
+                    <div class="formLabel">Predicted Waste Type:</div>
+                    <div>
+                        <span id="predictionOutput">N.A.</span>
+                    </div>
+                    <div style="text-align: center; display: flex;">
+                        <button style="width: 240px;">Submit</button>
+                        <button style="width: 240px; background-color: #333333;">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div style="display: flex;">
+                    <div><img width="276px" height="252px" src="static/images/app-img1.jpg"></div>
+                    <div><img width="276px" height="252px" src="static/images/app-img2.jpg"></div>
+                </div>
+                <div style="display: flex;">
+                    <div><img width="276px" height="252px" src="static/images/app-img3.jpg"></div>
+                    <div><img width="276px" height="252px" src="static/images/app-img4.jpg"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

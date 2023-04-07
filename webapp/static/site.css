@@ -1,0 +1,87 @@
+body {
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    font-size: large;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin: 5px 0px;
+    border: 2px solid black;
+    min-width: 360px;
+}
+
+
+/* custom classes */
+.topBar {
+    width: 100%;
+    color: white;
+    height: 20%;
+    display: flex;
+    padding: 15px;
+}
+
+.mainContent {
+    width: 100%;
+    background-color: white;
+    height: 60%;
+    padding: 15px;
+}
+
+.bottomBar {
+    width: 100%;
+    color: white;
+    padding: 15px;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.topA {
+    width: 50%;
+    font-size: xx-large;
+    font-weight: bold;
+    padding: 25px;
+}
+
+.topB {
+    width: 50%;
+    text-align: end;
+    margin-right: 50px;
+    padding-top: 25px;
+}
+
+.formBody {
+    width: fit-content;
+    background-color: #333333;
+    padding: 15px;
+    margin-left: calc(50% - 200px);
+    color: white;
+}
+
+.formHeading {
+    font-weight: 600;
+    text-align: center;
+    font-size: x-large;
+}
+
+.formLabel {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

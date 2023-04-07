@@ -78,3 +78,10 @@ input[type="text"], input[type="email"], input[type="password"] {
     text-align: center;
     font-size: x-large;
 }
+
+.formLabel {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -3,6 +3,7 @@
     <head>
         <title>Waste Segregation</title>
         <link rel="stylesheet" href="./static/site.css">
+        <link rel="stylesheet" href="./static/app.css">
     </head>
 
     <body>
@@ -18,18 +19,21 @@
 
         <div style="display: flex;">
 
-            <div style="margin-left: calc(50% - 456px); width: 360px; color: white;">
+            <div class="predictionForm">
                 <div class="formHeading">Predict Waste Type</div>
-                <div>Select Image:</div>
-                <div>
-                    <input type="file"/>
-                </div>
-                <div>Predicted Waste Type:</div>
-                <div>
-                    <span id="predictionOutput">N.A.</span>
-                </div>
-                <div style="text-align: center;">
-                    <button>Submit</button>
+                <div style="margin-top: calc(30% - 50px);">
+                    <div class="formLabel">Select Image:</div>
+                    <div>
+                        <input type="file"/>
+                    </div>
+                    <div class="formLabel">Predicted Waste Type:</div>
+                    <div>
+                        <span id="predictionOutput">N.A.</span>
+                    </div>
+                    <div style="text-align: center; display: flex;">
+                        <button style="width: 240px;">Submit</button>
+                        <button style="width: 240px; background-color: #333333;">Clear</button>
+                    </div>
                 </div>
             </div>
 

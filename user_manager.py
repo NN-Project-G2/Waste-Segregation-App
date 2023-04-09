@@ -1,6 +1,19 @@
 from sqlalchemy.orm import Session
+import json
 
-from . import models, schemas
+import models, schemas
+
+
+def create_user(db: Session, user: schemas.UserCreate):
+    db_user = models.User(
+        email=user.email, 
+        password=user.password, 
+        secret_question_answer=user.secret_question_answer
+    )
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
 
 
 def get_user_by_email(db: Session, email: str):
@@ -10,13 +23,22 @@ def get_user_by_email(db: Session, email: str):
 def get_user_by_email_password(db: Session, email: str, password: str):
     return db.query(models.User).filter(
         models.User.email == email, 
-        models.Users.password == password
+        models.User.password == password
     ).first()
 
 
-def create_user(db: Session, user: schemas.UserCreate):
-    db_user = models.User(email=user.email, hashed_password=user.password)
-    db.add(db_user)
+def get_user_by_email_secret_qtn_ans(db: Session, email: str, secret_qtn_ans: str):
+    return db.query(models.User).filter(
+        models.User.email == email, 
+        models.User.secret_question_answer == secret_qtn_ans
+    ).first()
+
+
+def update_password(db: Session, email: str, password: str):
+    db.query(models.User).filter(models.User.email == email).update(
+        {
+            'password': password
+        }
+    )
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    return True

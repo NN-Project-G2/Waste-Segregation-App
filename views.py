@@ -2,6 +2,7 @@ import traceback
 import json
 import io
 import numpy as np
+import cv2
 
 from fastapi import HTTPException, Request, File, Depends
 from typing import List
@@ -12,6 +13,8 @@ import asyncio
 from database_manager import SessionLocal, engine, get_db
 import user_manager
 import schemas
+
+from model.densenet_waste_classifier import predict_class
 
 
 def test_view():
@@ -66,9 +69,9 @@ def reset_user_credentials(user_email: str, secret_qtn_ans: str, new_password: s
 
 async def classify_view(file: bytes = File()):
     try:
-        img = cv2.imdecode(np.frombuffer(file, np.uint8), -1)
+        img = cv2.imdecode(np.frombuffer(file, np.uint8), cv2.IMREAD_COLOR)
 
-        pred_status, pred_class = predict_class(img)
+        pred_status, pred_class = predict_class(img, 1)
 
         if not pred_status:
             raise HTTPException(status_code=500, detail="Something went wrong.")

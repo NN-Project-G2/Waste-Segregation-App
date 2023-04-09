@@ -83,7 +83,7 @@ function login() {
     if ((email == "") || (password == "")){
         document.getElementById("loginFormMessage").innerHTML = "All fields are required";
     }else {
-        // resetAllFormFields();
+        resetAllFormFields();
         console.log(email, password);
         jQuery.ajax({
             type: 'POST',
@@ -117,7 +117,7 @@ function reset() {
     }else if (newPassword !== newPasswordConfirm) {
         document.getElementById("resetFormMessage").innerHTML = "Passwords do not match";
     }else {
-        // resetAllFormFields();
+        resetAllFormFields();
         console.log(secretQtn, secretAns);
         jQuery.ajax({
             type: 'POST',

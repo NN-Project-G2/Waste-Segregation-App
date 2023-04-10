@@ -10,11 +10,29 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    secret_question_answer: str
 
 
 class User(UserBase):
     id: int
-    secret_question_answer: str
+    created_on: datetime.datetime
+
+    class Config:
+        orm_mode = True
+
+
+class UserPredictionBase(BaseModel):
+    user_id: str
+
+
+class UserPredictionCreate(UserPredictionBase):
+    image_s3_path: str
+    predicted_label: str
+    actual_label: str
+
+
+class UserPrediction(UserPredictionBase):
+    id: int
     created_on: datetime.datetime
 
     class Config:

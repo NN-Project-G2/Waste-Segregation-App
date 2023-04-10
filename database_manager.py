@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db" 
-SQLALCHEMY_DATABASE_URL = "mysql://admin:admin#123@mysqldb/waste_segregator"
+SQLALCHEMY_DATABASE_URL = "mysql://admin:admin#123@localhost:3306/waste_segregator"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 

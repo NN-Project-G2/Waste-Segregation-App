@@ -2,9 +2,13 @@ var predictionId = null;
 
 
 $( document ).ready(function() {
-    clearAll();
+    if ((window.localStorage.getItem("accessToken") == null) ||
+    (window.localStorage.getItem("accessToken") == "undefined")){
+        window.location.assign("/");
+    }else{
+        clearAll();
+    }
 });
-
 
 
 function clearAll(clearInput=true){
@@ -30,6 +34,11 @@ function runClassifier(){
         async: false,
         cache: false,
         data : form_data,
+        beforeSend: function (xhr){ 
+            xhr.setRequestHeader(
+                'Authorization', window.localStorage.getItem("accessToken")
+            ); 
+        },
         success: function(resultData) { 
             console.log(resultData);
             document.getElementById("page-loader").style.display = "none";
@@ -60,6 +69,11 @@ function updateLabel(){
                     predictionId: predictionId,
                     expectedLabel: newLabel
                 }),
+                beforeSend: function (xhr){ 
+                    xhr.setRequestHeader(
+                        'Authorization', window.localStorage.getItem("accessToken")
+                    ); 
+                },
                 dataType: "json", 
                 contentType: "application/json; charset=utf-8",
                 success: function(resultData) { 
@@ -75,5 +89,7 @@ function updateLabel(){
 }
 
 function logOut(){
+    window.localStorage.removeItem("accessToken");
+    window.localStorage.removeItem("refreshToken");
     window.location.assign("/");
 }

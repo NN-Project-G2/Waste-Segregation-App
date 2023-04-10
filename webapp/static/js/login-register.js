@@ -96,6 +96,8 @@ function login() {
             contentType: "application/json; charset=utf-8",
             success: function(resultData) { 
                 console.log(resultData);
+                window.localStorage.setItem("accessToken", resultData["accessToken"]);
+                window.localStorage.setItem("refreshToken", resultData["refreshToken"]);
                 window.location.assign("/app")
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){

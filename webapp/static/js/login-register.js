@@ -55,7 +55,6 @@ function register(){
     }else {
         resetAllFormFields();
         console.log(email, password, passwordConfirm, secretQtn, secretAns);
-        console.log(url + "/api/register");
         jQuery.ajax({
             type: 'POST',
             url: "/api/register",
@@ -67,7 +66,8 @@ function register(){
             dataType: "json", 
             contentType: "application/json; charset=utf-8",
             success: function(resultData) { 
-                alert("User Registration Successful") 
+                alert("User Registration Successful");
+                viewLoginForm();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 alert("Something went wrong")

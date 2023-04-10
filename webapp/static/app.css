@@ -2,6 +2,9 @@
     margin-left: calc(50% - 456px); 
     width: 360px; 
     color: white;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .pageLoader {

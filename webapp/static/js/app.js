@@ -1,6 +1,12 @@
 var predictionId = null;
 
 
+$( document ).ready(function() {
+    clearAll();
+});
+
+
+
 function clearAll(clearInput=true){
     predictionId = null;
     document.getElementById("predicted-label").innerHTML = "N.A.";
@@ -66,4 +72,8 @@ function updateLabel(){
             });
         }
     }
+}
+
+function logOut(){
+    window.location.assign("/");
 }

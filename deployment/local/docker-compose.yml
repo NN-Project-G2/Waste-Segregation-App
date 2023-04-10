@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8.0.27
+    environment:
+      MYSQL_ROOT_PASSWORD: admin#123root  # superuser password, username is root
+      MYSQL_DATABASE: waste_segregator  # default db created when image first started
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin#123
+    volumes:
+      - ../../data/mysql:/usr/src/app/mysql
+    ports:
+      - 3306:3306
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+
+  webapp:
+    container_name: webappp
+    build:
+      context: ../../.
+      dockerfile: ./deployment/local/Dockerfile
+    volumes:
+      - ../../.:/usr/src/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysqldb
+    env_file:
+      - ./config.env
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8000

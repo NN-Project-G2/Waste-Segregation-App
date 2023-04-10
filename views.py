@@ -13,8 +13,9 @@ import asyncio
 from database_manager import SessionLocal, engine, get_db
 import user_manager
 import schemas
+import models
 
-from model.densenet_waste_classifier import predict_class
+from aimodel.densenet_waste_classifier import predict_class
 
 
 def test_view():
@@ -71,13 +72,34 @@ async def classify_view(file: bytes = File()):
     try:
         img = cv2.imdecode(np.frombuffer(file, np.uint8), cv2.IMREAD_COLOR)
 
-        pred_status, pred_class = predict_class(img, 1)
+        print(img.shape)
+
+        pred_status, pred_class, pred_id = predict_class(img, 1)
 
         if not pred_status:
             raise HTTPException(status_code=500, detail="Something went wrong.")
 
-        return {"predictedClass": pred_class}
+        return {"predictedClass": pred_class, "predictionId": pred_id}
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Something went wrong.")
 
+
+async def update_prediction_label(pred_id: int, actual_label: str, db: Session = SessionLocal()):
+    try:
+        pred = db.query(models.UserPrediction).filter(models.UserPrediction.id==pred_id).first()
+
+        if pred is None:
+            raise HTTPException(status_code=404, detail="Prediction does not exist")
+
+        db.query(models.UserPrediction).filter(models.UserPrediction.id == pred_id).update(
+            {
+                'actual_label': actual_label
+            }
+        )
+        db.commit()
+
+        return {"status": True}
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Something went wrong.")

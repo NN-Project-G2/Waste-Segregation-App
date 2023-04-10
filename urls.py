@@ -73,3 +73,12 @@ async def reset_user_password(request: Request,  db: Session = Depends(get_db)):
 async def classify_image_route(file: bytes = File()):
     return await classify_view(file)
 
+
+@router.post("/api/update-label")
+async def classify_image_route(request: Request):
+    data = await request.json()
+
+    pred_id = data['predictionId']
+    new_label = data['expectedLabel']
+
+    return await update_prediction_label(pred_id, new_label)

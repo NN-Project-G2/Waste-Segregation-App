@@ -6,18 +6,18 @@ import tensorflow as tf
 from sqlalchemy.orm import Session
 
 import models, schemas
+from database_manager import SessionLocal
 
 
-model = tf.keras.models.load_model("model/weights/new_model_denseNet169.h5")
-db = Session()
+model = tf.keras.models.load_model("aimodel/weights/new_model_denseNet169.h5")
 
 
 def predict_class(img_np_arr, user_id):
     if not isinstance(img_np_arr, np.ndarray):
-        return False, None
+        return False, None, None
 
     classes=["cardboard","glass","metal","paper","plastic","trash"]
-    user_pred = schemas.UserPredictionCreate
+    db = SessionLocal()
 
     img_np_arr = np.resize(img_np_arr, (224, 224, 3))
 
@@ -31,15 +31,14 @@ def predict_class(img_np_arr, user_id):
     pred_class_idx = pred.index(pred_max_prob_class)
     pred_class = classes[pred_class_idx]
 
-    # db_pred = models.UserPrediction(
-    #     user_id=user_id,
-    #     image_s3_path="in memory",
-    #     predicted_label=pred_class,
-    #     actual_label=pred_class
-    # )
-    # db.add(db_pred)
-    # db.commit()
-    # db.refresh(db_pred)
+    db_pred = models.UserPrediction(
+        user_id=user_id,
+        image_s3_path="in memory",
+        predicted_label=pred_class,
+        actual_label=pred_class
+    )
+    db.add(db_pred)
+    db.commit()
 
-    return True, pred_class
+    return True, pred_class, db_pred.id
     

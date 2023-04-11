@@ -1,0 +1,107 @@
+<html>
+
+    <head>
+        <title>Waste Segregation</title>
+        <link rel="stylesheet" href="./static/site.css">
+        <link rel="stylesheet" href="./static/login-register.css">
+        <script src="./static/js/jquery-3.6.4.min.js"></script>
+        <script src="./static/js/login-register.js"></script>
+    </head>
+
+    <body>
+        
+        <div class="topBar">
+            <div class="topA">
+                SORTING WASTE WITH<br> POWER OF AI VISION
+            </div>
+            <div class="topB">
+                <a href="/"><button style="background-color: inherit;">Home</button></a>
+                <button onclick="viewLoginForm()">Log In</button>
+                <button onclick="viewRegistrationForm()">Register</button>
+            </div>
+        </div>
+
+        <div class="formBody">
+            <div id="login-form" style="display: block;">
+                <div class="formHeading">Log In</div>
+                <div class="formLabel">Email:</div>
+                <div>
+                    <input type="email" id="userEmail" placeholder="e.g. john@mail.com"/>
+                </div>
+                <div class="formLabel">Password:</div>
+                <div>
+                    <input type="password" id="userPassword" placeholder="***********"/>
+                </div>
+                <div style="text-align: center;">
+                    <span id="loginFormMessage" style="color: red; text-align: center;"></span>
+                </div>
+                <div style="text-align: center;">
+                    <button onclick="login()">Submit</button>
+                </div>
+                <span style="color: #3d5aff; cursor: pointer;" onclick="viewResetPasswordForm()">Reset Password</span>
+            </div>
+
+            <div id="registration-form" style="display: none;">
+                <div class="formHeading">Register</div>
+                <div class="formLabel">Email:</div>
+                <div>
+                    <input type="email" id="userRegEmail" placeholder="e.g. john@mail.com"/>
+                </div>
+                <div class="formLabel">Password:</div>
+                <div>
+                    <input type="password" id="userRegPassword" placeholder="***********"/>
+                </div>
+                <div class="formLabel">Confirm Password:</div>
+                <div>
+                    <input type="password" id="userRegConfirmPassword" placeholder="***********"/>
+                </div>
+                <div class="formLabel">Secret Question-Answer (for password reset):</div>
+                <div>
+                    <input type="text" id="userRegSecretQtn" placeholder="Secret Question"/>
+                </div>
+                <div>
+                    <input type="text" id="userRegSecretAns" placeholder="Secret Answer"/>
+                </div>
+                <div style="text-align: center;">
+                    <span id="regFormMessage" style="color: red; text-align: center;"></span>
+                </div>
+                <div style="text-align: center;">
+                    <button onclick="register()">Submit</button>
+                </div>
+            </div>
+
+            <div id="reset-password-form" style="display: none;">
+                <div class="formHeading">Reset Password</div>
+                <div class="formLabel">Email:</div>
+                <div>
+                    <input type="email" id="resetUserEmail" placeholder="e.g. john@mail.com"/>
+                </div>
+                <div class="formLabel">Secret Question:</div>
+                <div>
+                    <input type="text" id="userSecretQtn" placeholder="Question"/>
+                </div>
+                <div class="formLabel">Secret Answer:</div>
+                <div>
+                    <input type="text" id="userSecretAns" placeholder="Answer"/>
+                </div>
+                <div class="formLabel">New Password:</div>
+                <div>
+                    <input type="password" id="userResetPassword" placeholder="***********"/>
+                </div>
+                <div class="formLabel">Confirm New Password:</div>
+                <div>
+                    <input type="password" id="userResetConfirmPassword" placeholder="***********"/>
+                </div>
+                <div style="text-align: center;">
+                    <span id="resetFormMessage" style="color: red; text-align: center;"></span>
+                </div>
+                <div style="text-align: center;">
+                    <button onclick="reset()">Submit</button>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

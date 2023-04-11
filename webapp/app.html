@@ -1,0 +1,68 @@
+<html>
+
+    <head>
+        <title>Waste Segregation</title>
+        <link rel="stylesheet" href="./static/site.css">
+        <link rel="stylesheet" href="./static/app.css">
+        <script src="./static/js/jquery-3.6.4.min.js"></script>
+        <script src="./static/js/app.js"></script>
+    </head>
+
+    <body>
+
+        <div id="page-loader" class="pageLoader" style="display: none;">
+            <div style="margin-top: 25%;">
+                AI is Classifying Please wait...
+            </div>
+        </div>
+
+        </div>
+        
+        <div class="topBar">
+            <div class="topA">
+                SORTING WASTE WITH<br> POWER OF AI VISION
+            </div>
+            <div class="topB">
+                <button onclick="logOut()">Log Out</button>
+            </div>
+        </div>
+
+        <div style="display: flex;">
+
+            <div class="predictionForm">
+                <div class="formHeading">Predict Waste Type</div>
+                <div style="margin-top: calc(30% - 50px);">
+                    <div class="formLabel">Select Image:</div>
+                    <div  style="text-align: center;">
+                        <input type="file" style="width: calc(100% - 20px);" id="input-image" accept="image/gif, image/jpeg, image/png" onchange="readURL(this)"/>
+                    </div>
+                    <div class="formLabel">Predicted Waste Type:</div>
+                    <div>
+                        <span id="predicted-label">N.A.</span>
+                    </div>
+                    <div style="text-align: center; display: flex;">
+                        <button style="width: calc(100% - 20px);" onclick="runClassifier()">Submit</button>
+                    </div>
+                </div>
+                <div style="margin-top: calc(15% - 50px);">
+                    <div class="formLabel">Actual Waste Type:</div>
+                    <div style="text-align: center;">
+                        <input type="text" id="expected-label" style="min-width: calc(100% - 20px);" placeholder="e.g. glass"/>
+                    </div>
+                    <div>("cardboard","glass","metal","paper","plastic","trash")</div>
+                    <div style="text-align: center;">
+                        <button style="width: calc(100% - 20px);" onclick="updateLabel()">Update</button>
+                        <button style="width: 240px; background-color: #333333; width: calc(100% - 20px);" onclick="clearAll()">Clear All</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inputImageDisplayBox">
+                <img id="selected-image" src="#" alt="Input Image"/>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

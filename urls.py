@@ -1,3 +1,4 @@
+import os
 import json
 import traceback
 
@@ -12,6 +13,7 @@ import schemas
 from views import *
 from database_manager import get_db
 from aws_manager import *
+from aimodel.densenet_waste_classifier import load_model_from_weights
 
 
 templates = Jinja2Templates(directory="webapp")
@@ -142,6 +144,32 @@ async def refresh_session(request: Request):
             resp['refreshToken'] = tokens['refreshToken']
 
         return resp 
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Something went wrong.")
+
+
+@router.post("/api/update-model")
+async def update_model_weights(request: Request):
+    auth_token = request.headers.get("Authorization", None)
+
+    if auth_token is None or auth_token != "MrbSC1w22RpMZi94IKp1vlC4qoYRuTdk":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    try:
+        local_model_path = "aimodel/weights/waste_classifier_model_denseNet169.h5"
+        if os.path.isfile(local_model_path):
+            os.remove(local_model_path)
+
+        s3_model_path = "aimodel/weights/waste_classifier_model_denseNet169.h5"
+            
+        download_file(
+            s3_model_path, 
+            local_model_path
+        )
+        load_model_from_weights()
+
+        return {"modelUpdated": True}
     except:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Something went wrong.")

@@ -77,12 +77,12 @@ async def classify_view(user_id, file: bytes = File()):
 
         print(img.shape)
 
-        pred_status, pred_class, pred_id = predict_class(img, user_id)
+        pred_status, pred_class, pred_id, pred_probability = predict_class(img, user_id)
 
         if not pred_status:
             raise HTTPException(status_code=500, detail="Something went wrong.")
 
-        return {"predictedClass": pred_class, "predictionId": pred_id}
+        return {"predictedClass": pred_class, "predictionProbability": pred_probability, "predictionId": pred_id}
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Something went wrong.")

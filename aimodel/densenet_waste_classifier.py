@@ -11,8 +11,16 @@ import models, schemas
 from database_manager import SessionLocal
 from aws_manager import *
 
+model = None
 
-model = tf.keras.models.load_model("aimodel/weights/waste_classifier_model_denseNet169.h5")
+
+def load_model_from_weights():
+    print("loading AI model...")
+    global model
+    model = tf.keras.models.load_model("aimodel/weights/waste_classifier_model_denseNet169.h5")
+
+
+load_model_from_weights()
 
 
 def predict_class(img_np_arr, user_id):
@@ -49,5 +57,5 @@ def predict_class(img_np_arr, user_id):
     db.add(db_pred)
     db.commit()
 
-    return True, pred_class, db_pred.id
+    return True, pred_class, db_pred.id, round((pred_max_prob_class*100), 2)
     

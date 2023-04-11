@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 DB_HOST=os.environ.get('DB_HOST', "localhost")
 DB_PORT=os.environ.get('DB_PORT', "3306")
-DB_NAME=os.environ.get('DB_NAME', "waste_segragator")
+DB_NAME=os.environ.get('DB_NAME', "waste_segragation")
 DB_USER=os.environ.get('DB_USER', "admin")
 DB_PASSWORD=os.environ.get('DB_PASSWORD', "admin#123")
 

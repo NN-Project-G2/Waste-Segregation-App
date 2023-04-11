@@ -5,10 +5,10 @@ import os
 import cv2
 
 session = boto3.Session(
-    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "AKIASZWXO4SV64HMLRRD"),
-    aws_secret_access_key=os.environ.get("AWS_ACCESS_KEY", "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")
+    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "AKIA3EVY7NYRX6I4R7NJ"),
+    aws_secret_access_key=os.environ.get("AWS_ACCESS_KEY", "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")
 )
-BUCKET_NAME = os.environ.get("BUCKET_NAME", "waste-segragation")
+BUCKET_NAME = os.environ.get("BUCKET_NAME", "waste-segregation-project")
 
 
 def upload_file(file_content, file_name, bucket=BUCKET_NAME):

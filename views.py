@@ -43,8 +43,11 @@ def login(user_email: str, user_password: str, db: Session):
         db_user = user_manager.get_user_by_email_password(db, email=user_email, password=user_password)
         if db_user is None:
             raise HTTPException(status_code=404, detail="User not found")
+
+        access_token = user_manager.generate_token(user_email, db_user.id)
+        refresh_token = user_manager.generate_token(user_email, db_user.id, 'refresh')
         
-        return {"userAuthorized": True}
+        return {"userAuthorized": True, "accessToken": access_token, "refreshToken": refresh_token}
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Something went wrong.")
@@ -68,18 +71,18 @@ def reset_user_credentials(user_email: str, secret_qtn_ans: str, new_password: s
         raise HTTPException(status_code=500, detail="Something went wrong.")
 
 
-async def classify_view(file: bytes = File()):
+async def classify_view(user_id, file: bytes = File()):
     try:
         img = cv2.imdecode(np.frombuffer(file, np.uint8), cv2.IMREAD_COLOR)
 
         print(img.shape)
 
-        pred_status, pred_class, pred_id = predict_class(img, 1)
+        pred_status, pred_class, pred_id, pred_probability = predict_class(img, user_id)
 
         if not pred_status:
             raise HTTPException(status_code=500, detail="Something went wrong.")
 
-        return {"predictedClass": pred_class, "predictionId": pred_id}
+        return {"predictedClass": pred_class, "predictionProbability": pred_probability, "predictionId": pred_id}
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Something went wrong.")

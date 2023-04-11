@@ -1,3 +1,4 @@
+import os
 import json
 import traceback
 
@@ -11,6 +12,8 @@ from sqlalchemy.orm import Session
 import schemas
 from views import *
 from database_manager import get_db
+from aws_manager import *
+from aimodel.densenet_waste_classifier import load_model_from_weights
 
 
 templates = Jinja2Templates(directory="webapp")
@@ -42,6 +45,12 @@ def test_route():
     return test_view()
 
 
+@router.get("/test-s3-download")
+def test_s3_download():
+    download_file("/test/51825003.jpg", "51825003.jpg")
+    return test_view()
+
+
 @router.post("/api/register", response_model=schemas.User)
 def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return register(user, db)
@@ -70,15 +79,97 @@ async def reset_user_password(request: Request,  db: Session = Depends(get_db)):
 
 
 @router.post("/api/classify")
-async def classify_image_route(file: bytes = File()):
-    return await classify_view(file)
+async def classify_image_route(request: Request, file: bytes = File()):
+    access_token = request.headers.get("Authorization", None)
+
+    if access_token is None:
+        raise HTTPException(status_code=422, detail="Authorization key missing")
+
+    status, user_data = user_manager.verify_token(access_token)
+    if not status:
+        raise HTTPException(status_code=401, detail="Unauthorised")
+
+    return await classify_view(user_data['userId'], file)
 
 
 @router.post("/api/update-label")
-async def classify_image_route(request: Request):
+async def update_image_label_route(request: Request):
+    access_token = request.headers.get("Authorization", None)
+
+    if access_token is None:
+        raise HTTPException(status_code=422, detail="Authorization key missing")
+
+    status, _ = user_manager.verify_token(access_token)
+    if not status:
+        raise HTTPException(status_code=401, detail="Unauthorised")
+
     data = await request.json()
 
     pred_id = data['predictionId']
     new_label = data['expectedLabel']
 
     return await update_prediction_label(pred_id, new_label)
+
+
+@router.get("/api/verify-session")
+async def verify_session(request: Request):
+    try:
+        access_token = request.headers.get("Authorization", None)
+
+        if access_token is None:
+            raise HTTPException(status_code=422, detail="Authorization key missing")
+
+        status, _ = user_manager.verify_token(access_token)
+
+        return {"tokenValid": status}
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Something went wrong.")
+
+
+@router.get("/api/refresh-session")
+async def refresh_session(request: Request):
+    try:
+        refresh_token = request.headers.get("Authorization", None)
+
+        if refresh_token is None:
+            raise HTTPException(status_code=422, detail="Authorization key missing")
+
+        status, tokens = user_manager.verify_refresh_token(refresh_token)
+
+        resp = {"tokenValid": status}
+
+        if status:
+            resp['accessToken'] = tokens['accessToken']
+            resp['refreshToken'] = tokens['refreshToken']
+
+        return resp 
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Something went wrong.")
+
+
+@router.post("/api/update-model")
+async def update_model_weights(request: Request):
+    auth_token = request.headers.get("Authorization", None)
+
+    if auth_token is None or auth_token != "MrbSC1w22RpMZi94IKp1vlC4qoYRuTdk":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    try:
+        local_model_path = "aimodel/weights/waste_classifier_model_denseNet169.h5"
+        if os.path.isfile(local_model_path):
+            os.remove(local_model_path)
+
+        s3_model_path = "aimodel/weights/waste_classifier_model_denseNet169.h5"
+            
+        download_file(
+            s3_model_path, 
+            local_model_path
+        )
+        load_model_from_weights()
+
+        return {"modelUpdated": True}
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Something went wrong.")

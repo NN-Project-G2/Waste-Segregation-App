@@ -17,7 +17,7 @@ model = None
 def load_model_from_weights():
     print("loading AI model...")
     global model
-    model = tf.keras.models.load_model("aimodel/weights/waste_classifier_model_denseNet169.h5")
+    model = tf.keras.models.load_model("aimodel/weights/wseg_3class_model_denseNet169.h5")
 
 
 load_model_from_weights()
@@ -27,7 +27,7 @@ def predict_class(img_np_arr, user_id):
     if not isinstance(img_np_arr, np.ndarray):
         return False, None, None
 
-    classes=["cardboard","glass","metal","paper","plastic","trash"]
+    classes=["metal","paper","plastic"]
     db = SessionLocal()
 
     img_input = np.resize(img_np_arr, (224, 224, 3))
@@ -36,6 +36,7 @@ def predict_class(img_np_arr, user_id):
         img_input = np.reshape(img_input, [1, 224, 224, 3])
 
     pred = model.predict(img_input)
+    print(pred)
     pred_max_prob_class = np.max(pred)
     pred = pred.tolist()[0]
 

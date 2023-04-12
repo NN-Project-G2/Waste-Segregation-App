@@ -6,7 +6,7 @@ services:
     image: mysql:8.0.27
     environment:
       MYSQL_ROOT_PASSWORD: admin#123root  # superuser password, username is root
-      MYSQL_DATABASE: waste_segregator  # default db created when image first started
+      MYSQL_DATABASE: waste_segregation  # default db created when image first started
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin#123
     volumes:

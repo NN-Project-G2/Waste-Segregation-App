@@ -16,6 +16,8 @@ print(SQLALCHEMY_DATABASE_URL)
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 
+    pool_size=10,
+    max_overflow=20,
     # connect_args={"check_same_thread": False}  # only if sqlite is used
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

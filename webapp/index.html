@@ -19,16 +19,20 @@
         </div>
 
         <div class="mainContent">
-            <div style="margin: 50px; margin-left: 25%; display: flex;">
+            <div style="margin-top: 20px; display: flex;">
                 <div>
                     <img src="./static/images/homepage-img.jpg" alt="Homepage" width="330px" height="308px">
                 </div>
                 <div class="contentBody">
-                    <div style="font-weight: 400; font-size: 40px;">
+                    <div style="font-weight: 400; font-size: 28px;">
                         SORTING WASTE USING CNN MODEL 
                     </div>
-                    <div style="font-size: 18px; line-height: 30px;">
-                        A Convolutional Neural Network is a special class of neural networks that are built with the ability  to extract unique features from image data. For instance, they are used in face detection and recognition because they can identify complex features in image data.
+                    <div style="font-size: 18px; line-height: 22px; text-align: justify;">
+                        <p>DenseNet169 is a convolutional neural network architecture that was introduced by Huang et al. in 2017. It is based on the DenseNet architecture, which is known for its efficient use of parameters and better performance compared to other architectures. The network has 169 layers.</p>
+
+                        <p>The architecture is built on the idea of connecting every layer to every other layer in a feedforward fashion. It uses dense blocks, which are composed of multiple layers connected to each other in a dense manner. In each dense block, the input feature maps are concatenated with the feature maps produced by each layer in the block, before being passed to the next block. The network also includes transition layers between the dense blocks, which reduce the number of feature maps and control the spatial dimensions of the output.</p>
+                        
+                        <p>The final layer of the network is a fully connected layer with a softmax activation function, which produces the final classification probabilities. DenseNet169 has achieved state-of-the-art performance on several computer vision tasks, including image classification, object detection, and semantic segmentation.</p>
                     </div>
                     <div style="text-align: center;">
                         <a href="login-register"><button>TRY IT YOURSELF</button></a>

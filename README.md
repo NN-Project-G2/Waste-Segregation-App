@@ -7,6 +7,7 @@ https://drive.google.com/drive/folders/1RmohN80b8eWkJUR6uBXBXXi1GRJWGFdE?usp=sha
 
 ## Model Weights<br>
 
+https://drive.google.com/file/d/1HisEhcYZ6uddwmSyOWZGTWm1ftytFNfh/view?usp=share_link
 
 
 

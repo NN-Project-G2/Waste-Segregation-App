@@ -5,8 +5,13 @@ import os
 import cv2
 
 session = boto3.Session(
+<<<<<<< HEAD
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", None),
     aws_secret_access_key=os.environ.get("AWS_ACCESS_KEY", None)
+=======
+    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "AWS ACCESS KEY ID"),
+    aws_secret_access_key=os.environ.get("AWS_ACCESS_KEY", "AWS ACCESS KEY")
+>>>>>>> 29f3353986575edaaee814a65b09b373f16341c3
 )
 BUCKET_NAME = os.environ.get("BUCKET_NAME", "waste-segregation-project")
 
